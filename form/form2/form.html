@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Form 2</title>
+        <link rel="stylesheet" href="./css/form.css">
+    </head>
+    <body>
+        <h2>ENTER YOUR DETAILS</h2>
+        <div id="form">
+            <form action="action.html" method="post" id="form1" enctype="multipart/form-data">
+                <div>Name</div>
+                <input type="text" id="name" name="name" placeholder="name">
+                
+                <div>Date of birth</div> 
+                <input type="date" id="date" name="dob" placeholder="dob">
+                
+                <div>Age</div>
+                <select name="age" id="age">
+                    <option value="" selected>choose any</option>
+                    <option value="1-10">1-10</option>
+                    <option value="10-20">10-20</option>
+                    <option value="20-30">20-30</option>
+                    <option value="40+">40+</option>
+                </select>
+                
+                <div>Address</div>
+                <textarea name="address" id="address" placeholder="address"></textarea>
+                
+                <div>Gender</div>
+                <div>
+                    <input type="radio" id="gender_female" name="gender" value="Female">Female
+                    <input type="radio" id="gender_male" name="gender" value="Male">Male
+                </div>
+                
+                <div>Hobbies</div>
+                <div>
+                    <span><input type="checkbox" id="hobby_dancing" name="hobbies[]" value="Dancing">Dancing</span>
+                    <span><input type="checkbox" id="hobby_singing" name="hobbies[]" value="Singing">Singing</span>
+                    <span><input type="checkbox" id="hobby_painting" name="hobbies[]" value="Painting">Painting</span>
+                    <span><input type="checkbox" id="hobby_drawing" name="hobbies[]" value="Drawing">Drawing</span>
+                    <span><input type="checkbox" id="hobby_reading" name="hobbies[]" value="Reading">Reading</span>
+                    <span><input type="checkbox" id="hobby_none" name="hobbies[]" value="None">None of the above</span>
+                </div>
+                
+                <div>Photo</div>
+                <input type="file" id="photo" name="photo">
+                
+                <div><input type="submit" id="submit" value="submit"></div>
+                <div id="error" style="color:red;"></div>
+            </form>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $("#submit").click(function() {
+                var errorMessage = "";
+                if ($("#name").val() == '') {
+                    errorMessage = "Please enter your Name !!";
+                } else if ($("#date").val() == '') {
+                    errorMessage = "Please enter your Date of birth !!";
+                } else if ($("#age").val() == '') {
+                    errorMessage = "Please select your age !!";
+                } else if ($("#address").val() == '') {
+                    errorMessage = "Please enter your address !!";
+                } else if (!$('input[name="gender"]:checked').val()) {
+                    errorMessage = "Please select your gender !!";
+                } else if (!$('input[name="hobbies[]"]:checked').val()) { 
+                    errorMessage = "Please select your hobbies !!";
+                } else if ($("#photo").get(0).files.length === 0) { 
+                    errorMessage = "Please attach your photo !!";
+                }
+
+                if (errorMessage !== "") {
+                    event.preventDefault();  
+                    $("#error").text(errorMessage);  
+                }
+            });
+        });
+        </script>
+    </body>
+</html>
